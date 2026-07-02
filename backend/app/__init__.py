@@ -3,10 +3,10 @@ from flask import Flask
 from config import Config
 from extensions import db, login_manager
 
-# Import models
-from app.models import User
+# Import Models
+from app.models.user import User
 
-# Import routes
+# Import Routes
 from app.routes.auth import auth_bp
 
 
@@ -16,15 +16,25 @@ def create_app():
 
     app.config.from_object(Config)
 
-    # Initialize extensions
+    # Initialize Extensions
     db.init_app(app)
     login_manager.init_app(app)
 
-    # Register blueprints
+    # Home Route
+    @app.route("/")
+    def home():
+        return "<h1>Rent & Flatmate Finder Backend Running Successfully 🚀</h1>"
+
+    # Register Blueprint
     app.register_blueprint(auth_bp)
 
-    # Create database tables
+    # Create Tables
     with app.app_context():
         db.create_all()
+
+    # Debug Routes
+    print("\n================ ROUTES ================\n")
+    print(app.url_map)
+    print("\n========================================\n")
 
     return app
