@@ -128,3 +128,52 @@ def get_listing(id):
         "available": listing.available
 
     }), 200
+# -----------------------
+# Update Listing
+# -----------------------
+@listing_bp.route("/listings/<int:id>", methods=["PUT"])
+def update_listing(id):
+
+    listing = Listing.query.get(id)
+
+    if not listing:
+        return jsonify({"message": "Listing not found"}), 404
+
+    data = request.get_json()
+
+    listing.title = data.get("title", listing.title)
+    listing.description = data.get("description", listing.description)
+    listing.rent = data.get("rent", listing.rent)
+    listing.city = data.get("city", listing.city)
+    listing.area = data.get("area", listing.area)
+    listing.property_type = data.get("property_type", listing.property_type)
+    listing.owner_name = data.get("owner_name", listing.owner_name)
+    listing.owner_phone = data.get("owner_phone", listing.owner_phone)
+    listing.available = data.get("available", listing.available)
+
+    db.session.commit()
+
+    return jsonify({
+        "message": "Listing Updated Successfully"
+    }), 200
+
+
+# -----------------------
+# Delete Listing
+# -----------------------
+@listing_bp.route("/listings/<int:id>", methods=["DELETE"])
+def delete_listing(id):
+
+    listing = Listing.query.get(id)
+
+    if not listing:
+        return jsonify({
+            "message": "Listing not found"
+        }), 404
+
+    db.session.delete(listing)
+    db.session.commit()
+
+    return jsonify({
+        "message": "Listing Deleted Successfully"
+    }), 200
