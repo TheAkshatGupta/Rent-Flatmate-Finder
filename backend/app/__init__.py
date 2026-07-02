@@ -1,6 +1,7 @@
 from flask import Flask
 
 from config import Config
+from app.models import User
 from extensions import db, login_manager
 
 
