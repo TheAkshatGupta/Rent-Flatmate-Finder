@@ -177,3 +177,50 @@ def delete_listing(id):
     return jsonify({
         "message": "Listing Deleted Successfully"
     }), 200
+# -----------------------
+# Search & Filter Listings
+# -----------------------
+@listing_bp.route("/listings/search", methods=["GET"])
+def search_listings():
+
+    city = request.args.get("city")
+    property_type = request.args.get("property_type")
+    max_rent = request.args.get("max_rent")
+
+    query = Listing.query
+
+    if city:
+        query = query.filter(Listing.city.ilike(f"%{city}%"))
+
+    if property_type:
+        query = query.filter(
+            Listing.property_type.ilike(f"%{property_type}%")
+        )
+
+    if max_rent:
+        query = query.filter(
+            Listing.rent <= float(max_rent)
+        )
+
+    listings = query.all()
+
+    result = []
+
+    for listing in listings:
+
+        result.append({
+
+            "id": listing.id,
+            "title": listing.title,
+            "description": listing.description,
+            "rent": listing.rent,
+            "city": listing.city,
+            "area": listing.area,
+            "property_type": listing.property_type,
+            "owner_name": listing.owner_name,
+            "owner_phone": listing.owner_phone,
+            "available": listing.available
+
+        })
+
+    return jsonify(result), 200
