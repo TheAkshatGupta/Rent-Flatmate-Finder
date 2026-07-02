@@ -3,7 +3,6 @@ from flask_login import UserMixin
 
 
 class User(UserMixin, db.Model):
-
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -20,16 +19,10 @@ class User(UserMixin, db.Model):
 
     profile_picture = db.Column(db.String(255))
 
-    created_at = db.Column(
-        db.DateTime,
-        server_default=db.func.now()
-    )
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
 
     updated_at = db.Column(
         db.DateTime,
         server_default=db.func.now(),
         onupdate=db.func.now()
     )
-
-    def __repr__(self):
-        return f"<User {self.email}>"
