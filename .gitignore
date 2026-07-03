@@ -1,0 +1,50 @@
+# Virtual Environment
+venv/
+
+# Python
+__pycache__/
+*.pyc
+
+# Environment Variables
+backend/.env
+
+# SQLite Database
+backend/instance/
+
+# VS Code
+.vscode/
+
+# JetBrains
+.idea/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Python Cache
+**/__pycache__/
+*.pyc
+
+# SQLite Database
+backend/instance/
+
+# Virtual Environment
+venv/
+
+# Python Cache
+**/__pycache__/
+*.pyc
+
+# Environment
+backend/.env
+
+# Database
+backend/instance/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
