@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 
 from config import Config
 from extensions import db, login_manager
@@ -26,19 +27,18 @@ def create_app():
 
     app = Flask(__name__)
 
-    # Configuration
     app.config.from_object(Config)
 
-    # Initialize Extensions
+    # Enable CORS
+    CORS(app)
+
     db.init_app(app)
     login_manager.init_app(app)
 
-    # Home Route
     @app.route("/")
     def home():
         return "<h1>Rent & Flatmate Finder Backend Running Successfully 🚀</h1>"
 
-    # Register Blueprints
     app.register_blueprint(auth_bp)
     app.register_blueprint(listing_bp)
     app.register_blueprint(profile_bp)
@@ -46,7 +46,6 @@ def create_app():
     app.register_blueprint(chat_bp)
     app.register_blueprint(compatibility_bp)
 
-    # Create Database Tables
     with app.app_context():
         db.create_all()
 

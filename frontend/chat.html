@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Chat</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+<div class="card shadow p-4">
+
+<h2 class="mb-4">
+
+Chat
+
+</h2>
+
+<div id="messages" class="border rounded p-3 mb-3" style="height:300px;overflow-y:auto;">
+
+</div>
+
+<form id="chatForm">
+
+<input
+class="form-control mb-3"
+id="message"
+placeholder="Type message..."
+required>
+
+<button class="btn btn-primary">
+
+Send
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+<script src="js/chat.js"></script>
+
+</body>
+
+</html>
